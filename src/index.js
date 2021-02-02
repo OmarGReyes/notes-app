@@ -22,7 +22,7 @@ app.engine(
 );
 app.set("view engine", ".hbs");
 //Middlewares
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: false })); //Encode URL
 app.use(methodOverride("_method"));
 app.use(
   session({
