@@ -5,3 +5,8 @@ body {
 /* .jumbotron {
     background: wheat;
 } */
+
+.logo {
+    width: 50%;
+    margin-top: 4px;
+}
