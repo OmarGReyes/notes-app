@@ -1,6 +1,6 @@
-<div class="row">
+<div class="row mt-2">
     {{#each notes}}
-    <div class="col-md-3">
+    <div class="col-md-3 mt-3">
         <div class="card">
             <div class="card-body">
                 <div class="row">                    
@@ -24,6 +24,9 @@
     {{else}}
         <div class="card mx-auto">
             <div class="card-body">
+                {{#if user}}
+                <h1>Welcome!</h1>
+                {{/if}}
                 <p class="lead">There are not notes yet.</p>
                 <a href="/notes/add" class="btn btn-success btn-block">Create One!</a>
             </div>

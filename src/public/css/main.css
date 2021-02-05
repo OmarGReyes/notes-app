@@ -10,3 +10,22 @@ body {
     width: 50%;
     margin-top: 4px;
 }
+
+.navbar {
+    background: #F1B24A;
+}
+.navbar-brand {
+    
+    font-weight: bolder;
+    
+}
+
+.signup span {
+    background-color: #F1B24A;
+    border-radius: 5px;
+    font-weight: bold;
+    color: black;
+    padding: 5px;
+    padding-bottom: 8px;
+    margin-left: -5px;
+}

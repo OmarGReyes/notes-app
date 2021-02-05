@@ -3,11 +3,13 @@ const router = express.Router();
 
 const Note = require('../models/Note') //Utilizar schema de la BD
 
-router.get("/notes/add", (req, res) => {
+const {isAuth} = require('../helpers/auth')
+
+router.get("/notes/add", isAuth,(req, res) => {
   res.render("notes/new-notes");
 });
 
-router.post("/notes/new-note", async (req, res) => {
+router.post("/notes/new-note", isAuth,async (req, res) => {
   const { title, description } = req.body;
   let errors = [];
   if (!title) {
@@ -24,15 +26,17 @@ router.post("/notes/new-note", async (req, res) => {
       description,
     });
   } else {
-      const newNote = new Note({title,description}) 
+      const newNote = new Note({title,description})
+      newNote.user = req.user.id 
       await newNote.save() //Almacenamos en la BD
+      req.flash('success_msg', 'Note added Successfully')
       res.redirect('/notes')
   }
   console.log(req.body);
 });
 
-router.get('/notes', async (req, res) => {
-    await Note.find().sort({date:'desc'})
+router.get('/notes', isAuth,async (req, res) => {
+    await Note.find({user: req.user.id}).sort({date:'desc'})
       .then(documentos => {
         const contexto = {
             notes: documentos.map(documento => {
@@ -49,7 +53,7 @@ router.get('/notes', async (req, res) => {
       })
   })
 
-router.get('/notes/edit/:id', async (req,res)=>{ 
+router.get('/notes/edit/:id', isAuth,async (req,res)=>{ 
     const note = await Note.findById(req.params.id).lean();    //Importante
     //.lean para evtar el error de handlebars
     res.render('notes/edit-note',{note})
@@ -57,14 +61,16 @@ router.get('/notes/edit/:id', async (req,res)=>{
  
 })
 
-router.put('/notes/edit-note/:id', async(req,res)=>{
+router.put('/notes/edit-note/:id', isAuth,async(req,res)=>{
   const {title,description}= req.body;
   await Note.findByIdAndUpdate(req.params.id, {title,description});
+  req.flash('success_msg', 'Note edited Successfully')
   res.redirect('/notes')
 })
 
-router.delete('/notes/delete/:id', async(req,res)=>{
+router.delete('/notes/delete/:id', isAuth,async(req,res)=>{
   await Note.findByIdAndDelete(req.params.id)
+  req.flash('success_msg', 'Note deleted Successfully')
   res.redirect('/notes')
 })
 
