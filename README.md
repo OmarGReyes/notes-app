@@ -24,7 +24,7 @@ App created with:
   
  <h2> Deployment </h2>
  
- This project was deployment on <a href= "https://notes-applicationomargonzalez.herokuapp.com/" target="_blank">Heroku</a>
+ This project was deployed on <a href= "https://notes-applicationomargonzalez.herokuapp.com/" target="_blank">Heroku</a>
  and for the MongoDB cloud services was used <a href= "https://www.mongodb.com/cloud/atlas" target="_blank">MongoDB Atlas</a>
  
  <h2> Installation on local server </h2>
