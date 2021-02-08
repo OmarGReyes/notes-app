@@ -36,6 +36,10 @@ App created with:
       * npm install
       * npm run dev
       
+<h2> Screenshot </h2>
+
+![Image of App](https://github.com/OmarGReyes/notes-app/blob/master/src/public/img/appimg.png)
+      
  
   
 
