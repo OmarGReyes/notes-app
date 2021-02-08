@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 
 const Note = require('../models/Note') //Utilizar schema de la BD
-
 const {isAuth} = require('../helpers/auth')
 
 router.get("/notes/add", isAuth,(req, res) => {
@@ -72,6 +71,13 @@ router.delete('/notes/delete/:id', isAuth,async(req,res)=>{
   await Note.findByIdAndDelete(req.params.id)
   req.flash('success_msg', 'Note deleted Successfully')
   res.redirect('/notes')
+})
+
+router.get('/notes/delete/all', isAuth, async(req,res,next)=>{  
+    await Note.deleteMany({user: req.user.id })
+    req.flash('success_msg', 'All notes deleted successfully')
+    res.redirect('/notes')
+ 
 })
 
 
